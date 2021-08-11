@@ -48,10 +48,10 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"**▾∮مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n**▾∮الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        notification = f"**▾∮مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n**▾∮الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     else:
         start_date = check.date
-        notification = f"**▾∮ قام المستخدم ↫ ** 「{_format.mentionuser(user.first_name , user.id)}」 **بإعادة تشغيل البوت❗️**\n**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        notification = f"**▾∮ قام المستخدم ↫ ** 「{_format.mentionuser(user.first_name , user.id)}」 **بإعادة تشغيل البوت❗️**\n**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
      try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -99,7 +99,7 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"**▾∮ مرحبا عزيزي ↫ **{mention}\n**▾∮انا البوت المساعد لــ ↫ **{my_mention}\n**يمكنك مراسلة صاحب البوت من خلالي**\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+            start_msg = f"**▾∮ مرحبا عزيزي ↫ **{mention}\n**▾∮انا البوت المساعد لــ ↫ **{my_mention}\n**يمكنك مراسلة صاحب البوت من خلالي**\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
         buttons = [
             (
                 Button.url(
@@ -109,7 +109,7 @@ async def bot_start(event):
             )
         ]
     else:
-        start_msg = "**واو! انكَ مطوري 👨‍💻👏**\n**بماذا تريد ان اساعدك ؟ **\n**اليكَ بعض التخصيصات اكتب** `.اوامري`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        start_msg = "**واو! انكَ مطوري 👨‍💻👏**\n**بماذا تريد ان اساعدك ؟ **\n**اليكَ بعض التخصيصات اكتب** `.اوامري`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
         buttons = None
     try:
         await event.client.send_message(
@@ -280,7 +280,7 @@ async def handler(event):
 
 
 @November.bot_cmd(
-    pattern=f"^/uinfo$",
+    pattern=f"^/info$",
     from_users=Config.OWNER_ID,
 )
 async def bot_start(event):
@@ -295,7 +295,7 @@ async def bot_start(event):
     users = get_user_id(reply_to)
     if users is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "`حدث خطأ!`\n**لم اعثر ع المستخدم في بياناتي ✘**"
         )
     for usr in users:
         user_id = int(usr.chat_id)
@@ -303,9 +303,9 @@ async def bot_start(event):
         break
     if user_id is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "`حدث خطأ!`\n**لم اعثر ع المستخدم في بياناتي ✘**"
         )
-    uinfo = f"**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}」\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+    uinfo = f"**▾∮الاسم ⪼ **`{user_name}`\n**▾∮الايدي ⪼ **`{user_id}`\n**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}」\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     await info_msg.edit(uinfo)
 
 
@@ -330,7 +330,7 @@ async def send_flood_alert(user_) -> None:
             FloodConfig.ALERT[user_.id]["count"] = 1
         except Exception as e:
             if BOTLOG:
-                await catub.tgbot.send_message(
+                await November.tgbot.send_message(
                     BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`" #بعدين
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
@@ -355,7 +355,7 @@ async def send_flood_alert(user_) -> None:
                     "Is Flooding your bot !, Check `.help delsudo` to remove the user from Sudo."
                 )
                 if BOTLOG:
-                    await catub.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
+                    await November.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
             else:
                 await ban_user_from_bot(
                     user_,
@@ -369,7 +369,7 @@ async def send_flood_alert(user_) -> None:
         if not fa_id:
             return
         try:
-            msg_ = await catub.tgbot.get_messages(BOTLOG_CHATID, fa_id)
+            msg_ = await November.tgbot.get_messages(BOTLOG_CHATID, fa_id)
             if msg_.text != flood_msg:
                 await msg_.edit(flood_msg, buttons=buttons)
         except Exception as fa_id_err:
@@ -377,30 +377,30 @@ async def send_flood_alert(user_) -> None:
             return
     else:
         if BOTLOG:
-            fa_msg = await catub.tgbot.send_message(
+            fa_msg = await November.tgbot.send_message(
                 BOTLOG_CHATID,
                 flood_msg,
                 buttons=buttons,
             )
         try:
             chat = await catub.tgbot.get_entity(BOTLOG_CHATID)
-            await catub.tgbot.send_message(
+            await November.tgbot.send_message(
                 Config.OWNER_ID,
                 f"⚠️  **[Bot Flood Warning !](https://t.me/c/{chat.id}/{fa_msg.id})**",
             )
         except UserIsBlockedError:
             if BOTLOG:
-                await catub.tgbot.send_message(BOTLOG_CHATID, "**Unblock your bot !**")
+                await November.tgbot.send_message(BOTLOG_CHATID, "**Unblock your bot !**")
     if FloodConfig.ALERT[user_.id].get("fa_id") is None and fa_msg:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
+@November.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
 @check_owner
 async def bot_pm_ban_cb(c_q: CallbackQuery):
     user_id = int(c_q.pattern_match.group(1))
     try:
-        user = await catub.get_entity(user_id)
+        user = await November.get_entity(user_id)
     except Exception as e:
         await c_q.answer(f"Error:\n{str(e)}")
     else:
@@ -437,7 +437,7 @@ def is_flood(uid: int) -> Optional[bool]:
         return True
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
+@November.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
@@ -447,8 +447,8 @@ async def settings_toggle(c_q: CallbackQuery):
     await c_q.edit("BOT_ANTIFLOOD is now disabled !")
 
 
-@catub.bot_cmd(incoming=True, func=lambda e: e.is_private)
-@catub.bot_cmd(edited=True, func=lambda e: e.is_private)
+@November.bot_cmd(incoming=True, func=lambda e: e.is_private)
+@November.bot_cmd(edited=True, func=lambda e: e.is_private)
 async def antif_on_msg(event):
     if gvarstatus("bot_antif") is None:
         return

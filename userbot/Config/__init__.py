@@ -1,1 +1,1 @@
-from .catub_config import Config
+from .Nov_config import Config

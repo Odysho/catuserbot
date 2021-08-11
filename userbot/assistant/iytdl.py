@@ -1,8 +1,3 @@
-""" Download Youtube Video / Audio in a User friendly interface """
-# --------------------------- #
-#   Modded ytdl by code-rgb   #
-# --------------------------- #
-
 import asyncio
 import glob
 import io
@@ -18,7 +13,7 @@ from telethon.events import CallbackQuery
 from telethon.utils import get_attributes
 from wget import download
 
-from userbot import catub
+from userbot import November
 
 from ..Config import Config
 from ..core import check_owner, pool
@@ -44,9 +39,9 @@ PATH = "./userbot/cache/ytsearch.json"
 plugin_category = "bot"
 
 
-@catub.cat_cmd(
-    pattern="iytdl(?:\s|$)([\s\S]*)",
-    command=("iytdl", plugin_category),
+@November.Nov_cmd(
+    pattern="بحث(?:\s|$)([\s\S]*)",
+    command=("بحث", plugin_category),
     info={
         "header": "ytdl with inline buttons.",
         "description": "To search and download youtube videos by inline buttons.",
@@ -87,13 +82,13 @@ async def iytdl_inline(event):
         await catevent.edit("`Sorry!. Can't find any results`")
 
 
-@catub.tgbot.on(
+@November.tgbot.on(
     CallbackQuery(
         data=re.compile(b"^ytdl_download_(.*)_([\d]+|mkv|mp4|mp3)(?:_(a|v))?")
     )
 )
 @check_owner
-async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
+async def ytdl_download_callback(c_q: CallbackQuery):  
     yt_code = (
         str(c_q.pattern_match.group(1).decode("UTF-8"))
         if c_q.pattern_match.group(1) is not None
@@ -182,7 +177,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     )
 
 
-@catub.tgbot.on(
+@November.tgbot.on(
     CallbackQuery(data=re.compile(b"^ytdl_(listall|back|next|detail)_([a-z0-9]+)_(.*)"))
 )
 @check_owner

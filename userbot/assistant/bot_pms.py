@@ -8,7 +8,7 @@ from telethon.errors import UserIsBlockedError
 from telethon.events import CallbackQuery, StopPropagation
 from telethon.utils import get_display_name
 
-from userbot import Config, catub
+from userbot import Config, November
 
 from ..core import check_owner, pool
 from ..core.logger import logging
@@ -48,15 +48,11 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+        notification = f"**▾∮مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n**▾∮الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     else:
         start_date = check.date
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
-    try:
+        notification = f"**▾∮ قام المستخدم ↫ ** 「{_format.mentionuser(user.first_name , user.id)}」 **بإعادة تشغيل البوت❗️**\n**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+     try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
         LOGS.error(str(e))
@@ -64,14 +60,14 @@ async def check_bot_started_users(user, event):
         await event.client.send_message(BOTLOG_CHATID, notification)
 
 
-@catub.bot_cmd(
+@November.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.is_private,
 )
 async def bot_start(event):
     chat = await event.get_chat()
-    user = await catub.get_me()
+    user = await November.get_me()
     if check_is_black_list(chat.id):
         return
     reply_to = await reply_id(event)
@@ -103,22 +99,17 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention},\
-                        \nI am {my_mention}'s assistant bot.\
-                        \nYou can contact to my master from here.\
-                        \n\nPowered by [Catuserbot](https://t.me/catuserbot)"
+            start_msg = f"**▾∮ مرحبا عزيزي ↫ **{mention}\n**▾∮انا البوت المساعد لــ ↫ **{my_mention}\n**يمكنك مراسلة صاحب البوت من خلالي**\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
         buttons = [
             (
-                Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
                 Button.url(
-                    "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
+                    "مطور السورس",
+                    "https://t.me/oorrr",
                 ),
             )
         ]
     else:
-        start_msg = "Hey Master!\
-            \nHow can i help you ?"
+        start_msg = "**واو! انكَ مطوري 👨‍💻👏**\n**بماذا تريد ان اساعدك ؟ **\n**اليكَ بعض التخصيصات اكتب** `.اوامري`\n\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
         buttons = None
     try:
         await event.client.send_message(
@@ -132,14 +123,13 @@ async def bot_start(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"**Error**\nThere was a error while user starting your bot.\
-                \n`{str(e)}`",
+                f"**▾∮حدث خطأ عندما قام المستخدم بتشغيل البوت!**\n`{str(e)}`",
             )
     else:
         await check_bot_started_users(chat, event)
 
 
-@catub.bot_cmd(incoming=True, func=lambda e: e.is_private)
+@November.bot_cmd(incoming=True, func=lambda e: e.is_private)
 async def bot_pms(event):  # sourcery no-metrics
     chat = await event.get_chat()
     if check_is_black_list(chat.id):
@@ -153,7 +143,7 @@ async def bot_pms(event):  # sourcery no-metrics
             if BOTLOG:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                    f"**Error**\nWhile storing messages details in database\n`{str(e)}`",  #بعدين
                 )
     else:
         if event.text.startswith("/"):
@@ -180,9 +170,9 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
+                return await event.reply("**▾ قام المستخدم بحظر البوت❗️**")
             except Exception as e:
-                return await event.reply(f"**Error:**\n`{str(e)}`")
+                return await event.reply(f"**▾∮ حدث خطأ!**\n`{str(e)}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -192,12 +182,12 @@ async def bot_pms(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`", #بعدين
                     )
 
 
-@catub.bot_cmd(edited=True)
-async def bot_pms_edit(event):  # sourcery no-metrics
+@November.bot_cmd(edited=True)
+async def bot_pms_edit(event):  
     chat = await event.get_chat()
     if check_is_black_list(chat.id):
         return
@@ -213,7 +203,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
         if reply_msg:
             await event.client.send_message(
                 Config.OWNER_ID,
-                f"⬆️ **This message was edited by the user** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
+                f"▾∮ قام المستخدم ↫  「{_format.mentionuser(get_display_name(chat) , chat.id)}」 بتعديل الرسالة⇅",
                 reply_to=reply_msg,
             )
             msg = await event.forward_to(Config.OWNER_ID)
@@ -224,7 +214,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`", #بعدين
                     )
     else:
         reply_to = await reply_id(event)
@@ -282,24 +272,24 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                        f"⬆️ **This message was deleted by the user** {_format.mentionuser(user_name , user_id)}.",
+                f"▾∮ قام المستخدم ↫  「{_format.mentionuser(get_display_name(chat) , chat.id)}」 بحذف الرسالة ↧",
                         reply_to=reply_msg,
                     )
             except Exception as e:
                 LOGS.error(str(e))
 
 
-@catub.bot_cmd(
+@November.bot_cmd(
     pattern=f"^/uinfo$",
     from_users=Config.OWNER_ID,
 )
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
-        return await event.reply("Reply to a message to get message info")
+        return await event.reply("**▾∮قم بالرد ع رسالة المستخدم لجلب المعلومات!**")
     info_msg = await event.client.send_message(
         event.chat_id,
-        "`🔎 Searching for this user in my database ...`",
+        "**▾∮ سأجلب المعلومات من قاعدة بياناتي ✓",
         reply_to=reply_to,
     )
     users = get_user_id(reply_to)
@@ -315,9 +305,7 @@ async def bot_start(event):
         return await info_msg.edit(
             "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
         )
-    uinfo = f"This message was sent by 👤 {_format.mentionuser(user_name , user_id)}\
-            \n**First Name:** {user_name}\
-            \n**User ID:** `{user_id}`"
+    uinfo = f"**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}」\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     await info_msg.edit(uinfo)
 
 
@@ -343,7 +331,7 @@ async def send_flood_alert(user_) -> None:
         except Exception as e:
             if BOTLOG:
                 await catub.tgbot.send_message(
-                    BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`" #بعدين
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
     else:

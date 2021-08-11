@@ -3,7 +3,7 @@ from datetime import datetime
 
 from telethon.errors import BadRequestError, FloodWaitError, ForbiddenError
 
-from userbot import catub
+from userbot import Nov
 
 from ..Config import Config
 from ..core.logger import logging
@@ -28,36 +28,24 @@ botusername = Config.TG_BOT_USERNAME
 cmhd = Config.COMMAND_HAND_LER
 
 
-@catub.bot_cmd(
-    pattern=f"^/help$",
+@Nov.bot_cmd(
+    pattern=f"^اوامري$",
     from_users=Config.OWNER_ID,
 )
 async def bot_help(event):
     await event.reply(
-        f"""The commands in the bot are:
-**Note : **__This commands work only in this bot__ {botusername}
+        f"""**▾∮ قائـمه اوامر المطور ↶**\n* `تستخدم في ↫ `{botusername} `فقط!`\n\n
+/info\n**▾∮قم بالرد ع المستخدم لجلب معلوماتة ↶**\n*` يساعد ع معرفة الملصقات المرسلة `ツ\n
+/ban\n**▾∮قم بالرد ع المستخدم واعطاؤه السبب او ↶**\n**/ban @nneee + السبب**\n*` لحظر المستخدم من البوت `✘\n
+/unban\n**▾∮الامر والمعرف والسبب (اختياري) ↶**\n**/unban @nneee + السبب اختياري**\n*`لالغاء حظر المستخدم من البوت `✔️\n
+/cast\n**▾∮قم بالرد ع الرسالة لاذاعتها للمستخدمين ↸**\n*`لنشر رسالة لمستخدمي البوت`⊠\n
 
-• **Cmd : **/uinfo <reply to user message>
-• **Info : **__You have noticed that forwarded stickers/emoji doesn't have forward tag so you can identify the user who sent thoose messages by this cmd.__
-• **Note : **__It works for all forwarded messages. even for users who's permission forward message nobody.__
-
-• **Cmd : **/ban <reason> or /ban <username/userid> <reason>
-• **Info : **__Reply to a user message with reason so he will be notified as you banned from the bot and his messages will not be forworded to you further.__
-• **Note : **__Reason is must. without reason it won't work. __
-
-• **Cmd : **/unban <reason(optional)> or /unban <username/userid>
-• **Info : **__Reply to user message or provide username/userid to unban from the bot.__
-• **Note : **__To check banned users list use__ `{cmhd}bblist`.
-
-• **Cmd : **/broadcast
-• **Info : **__Reply to a message to get broadcasted to every user who started your bot. To get list of users use__ `{cmhd}bot_users`.
-• **Note : **__if user stoped/blocked the bot then he will be removed from your database that is he will erased from the bot_starters list.__
 """
     )
 
 
-@catub.bot_cmd(
-    pattern=f"^/broadcast$",
+@Nov.bot_cmd(
+    pattern=f"^/cast$",
     from_users=Config.OWNER_ID,
 )
 async def bot_broadcast(event):
@@ -117,8 +105,8 @@ async def bot_broadcast(event):
     await br_cast.edit(b_info, parse_mode="html")
 
 
-@catub.cat_cmd(
-    pattern=f"bot_users$",
+@Nov.cat_cmd(
+    pattern=f"/users$",
     command=("bot_users", plugin_category),
     info={
         "header": "To get users list who started bot.",
@@ -137,7 +125,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@catub.bot_cmd(
+@Nov.bot_cmd(
     pattern=f"^/ban\s+([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -172,7 +160,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@catub.bot_cmd(
+@Nov.bot_cmd(
     pattern=f"^/unban(?:\s|$)([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -199,7 +187,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@catub.cat_cmd(
+@Nov.cat_cmd(
     pattern=f"bblist$",
     command=("bblist", plugin_category),
     info={
@@ -219,7 +207,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@catub.cat_cmd(
+@Nov.cat_cmd(
     pattern=f"bot_antif (on|off)$",
     command=("bot_antif", plugin_category),
     info={

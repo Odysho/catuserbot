@@ -338,14 +338,10 @@ async def send_flood_alert(user_) -> None:
         flood_count = FloodConfig.ALERT[user_.id]["count"] = 1
 
     flood_msg = (
-        r"`▾∮ تحذير التكرار ⚠️`"
+        r"` تحذير التكرار ⚠️`"
         "\n\n"
         f"**▾∮  المستخدم ⪼** 「{_format.mentionuser(get_display_name(user_), user_.id)}」\n**▾∮الايدي ⪼ **`{user_.id}`\n\n**▾ المستخدم قام بتكرار الرسائل! العدد ↫** `({flood_count})`\n`*عند الاهمال سيتم حظره تلقائي ❗️`\n**للاجراء السريع في الاسفل ↶**"
-        f"  Name: {get_display_name(user_)}\n"
-        f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
-        f"\n\n**Is spamming your bot !** ->  [ Flood rate ({flood_count}) ]\n"
-        "`*عند الاهمال سيتم حظره تلقائي ❗️`\n**للاجراء السريع في الاسفل ↶**"
-    )
+ )
 
     if found:
         if flood_count >= FloodConfig.AUTOBAN:
@@ -359,7 +355,7 @@ async def send_flood_alert(user_) -> None:
             else:
                 await ban_user_from_bot(
                     user_,
-                    f"Automated Ban for Flooding bot [exceeded flood rate of ({FloodConfig.AUTOBAN})]",
+                    f"حظر تلقائي لتكرارك {FloodConfig.AUTOBAN} رسائل!",
                 )
                 FloodConfig.USERS[user_.id].clear()
                 FloodConfig.ALERT[user_.id].clear()
@@ -390,7 +386,7 @@ async def send_flood_alert(user_) -> None:
             )
         except UserIsBlockedError:
             if BOTLOG:
-                await november.tgbot.send_message(BOTLOG_CHATID, "**Unblock your bot !**")
+                await november.tgbot.send_message(BOTLOG_CHATID, "**إلغاء حظر البوت الخاص بك !**")
     if FloodConfig.ALERT[user_.id].get("fa_id") is None and fa_msg:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
@@ -402,11 +398,11 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await november.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"Error:\n{str(e)}")
+        await c_q.answer(f"**⌔︙عـذرا هنـاك خطـأ 🚫 :**\n{str(e)}")
     else:
-        await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
-        await ban_user_from_bot(user, "Spamming Bot")
-        await c_q.edit(f"✅ **Successfully Banned**  User ID: {user_id}")
+        await c_q.answer(f"جاري حظر المستخدم ↫ `{user_name}`", alert=False)
+        await ban_user_from_bot(user, "لا يسمح بتكرار الرسائل!")
+        await c_q.edit(f"▾∮ تم حظر المستخدم بسبب التكرار❗️ ↶**\n**▾∮الاسم ⪼ **`{user_name}`\n**▾∮الايدي ⪼ **`{user_id}`\n**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}")
 
 
 def time_now() -> Union[float, int]:
@@ -415,7 +411,7 @@ def time_now() -> Union[float, int]:
 
 @pool.run_in_thread
 def is_flood(uid: int) -> Optional[bool]:
-    """Checks if a user is flooding"""
+    "سأعرف ان كان المستخدم يكرر برسائله ㋡"
     FloodConfig.USERS[uid].append(time_now())
     if (
         len(
@@ -441,10 +437,10 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer(f"▾∮ تحذير التكرار فعلا غير مفعل ❓**", alert=False)
+        return await c_q.answer(f" تحذير التكرار فعلا غير مفعل ❓", alert=False)
     delgvar("bot_antif")
-    await c_q.answer(f"▾∮ تم ايقاف تحذير التكرار ❗️**", alert=False)
-    await c_q.edit("▾∮ تحذير التكرار غير مفعل الان  ✅**")
+    await c_q.answer(f" تم ايقاف تحذير التكرار ❗️", alert=False)
+    await c_q.edit("**▾∮ تحذير التكرار غير مفعل الان  ✅**")
 
 
 @november.bot_cmd(incoming=True, func=lambda e: e.is_private)

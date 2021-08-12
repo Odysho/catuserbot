@@ -12,10 +12,10 @@ __license__ = "GNU Affero General Public License v3.0"
 __author__ = "NovemberBot <https://t.me/nneee>"
 __copyright__ = "NovemberBot Copyright (C) 2020 - 2021  " + __author__
 
-catub.version = __version__
-catub.tgbot.version = __version__
+november.version = __version__
+november.tgbot.version = __version__
 LOGS = logging.getLogger("NovemberBot")
-bot = catub
+bot = november
 
 StartTime = time.time()
 catversion = "3.0.3"

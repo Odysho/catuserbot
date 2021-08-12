@@ -48,10 +48,10 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"**▾∮مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n**▾∮الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        notification = f"**▾∮مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n\n**▾∮الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     else:
         start_date = check.date
-        notification = f"**▾∮ قام المستخدم ↫ ** 「{_format.mentionuser(user.first_name , user.id)}」 **بإعادة تشغيل البوت❗️**\n**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        notification = f"**▾∮ المستخدم ↫** 「{_format.mentionuser(user.first_name , user.id)}」 **إعاد تشغيل البوت❗️**\n\n**▾∮ الاسم ⪼ **`{get_display_name(user)}`\n**▾∮ الايدي ⪼ ** `{user.id}`\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
      try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -170,7 +170,7 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("**▾ قام المستخدم بحظر البوت❗️**")
+                return await event.reply("**▾∮ قام المستخدم بحظر البوت❗️**")
             except Exception as e:
                 return await event.reply(f"**▾∮ حدث خطأ!**\n`{str(e)}`")
             try:
@@ -272,7 +272,7 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                f"▾∮ قام المستخدم ↫  「{_format.mentionuser(get_display_name(chat) , chat.id)}」 بحذف الرسالة ↧",
+                f"▾∮ قام المستخدم ↫  「{_format.mentionuser(user_name , user_id)}」 بحذف الرسالة ↧",
                         reply_to=reply_msg,
                     )
             except Exception as e:
@@ -338,18 +338,18 @@ async def send_flood_alert(user_) -> None:
         flood_count = FloodConfig.ALERT[user_.id]["count"] = 1
 
     flood_msg = (
-        r"⚠️ **#Flood_Warning**"
+        r"`▾∮ تحذير التكرار ⚠️`"
         "\n\n"
-        f"  ID: `{user_.id}`\n"
+        f"**▾∮  المستخدم ⪼** 「{_format.mentionuser(get_display_name(user_), user_.id)}」\n**▾∮الايدي ⪼ **`{user_.id}`\n\n**▾ المستخدم قام بتكرار الرسائل! العدد ↫** `({flood_count})`\n`*عند الاهمال سيتم حظره تلقائي ❗️`\n**للاجراء السريع في الاسفل ↶**"
         f"  Name: {get_display_name(user_)}\n"
         f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
         f"\n\n**Is spamming your bot !** ->  [ Flood rate ({flood_count}) ]\n"
-        "__Quick Action__: Ignored from bot for a while."
+        "`*عند الاهمال سيتم حظره تلقائي ❗️`\n**للاجراء السريع في الاسفل ↶**"
     )
 
     if found:
         if flood_count >= FloodConfig.AUTOBAN:
-            if user_.id in Config.SUDO_USERS:
+            if user_.id in Config.SUDO_USERS:                                                 #بعدين
                 sudo_spam = (
                     f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID: {user_.id}\n\n"
                     "Is Flooding your bot !, Check `.help delsudo` to remove the user from Sudo."
@@ -386,7 +386,7 @@ async def send_flood_alert(user_) -> None:
             chat = await november.tgbot.get_entity(BOTLOG_CHATID)
             await november.tgbot.send_message(
                 Config.OWNER_ID,
-                f"⚠️  **[Bot Flood Warning !](https://t.me/c/{chat.id}/{fa_msg.id})**",
+                f"⚠️  **[▾∮ يوجد تكرار!\nإضغط ع الرسالة لمعرفتهُ واجراء اللازم!](https://t.me/c/{chat.id}/{fa_msg.id})**",
             )
         except UserIsBlockedError:
             if BOTLOG:
@@ -441,10 +441,10 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer(f"Bot Antiflood was already disabled.", alert=False)
+        return await c_q.answer(f"▾∮ تحذير التكرار فعلا غير مفعل ❓**", alert=False)
     delgvar("bot_antif")
-    await c_q.answer(f"Bot Antiflood disabled.", alert=False)
-    await c_q.edit("BOT_ANTIFLOOD is now disabled !")
+    await c_q.answer(f"▾∮ تم ايقاف تحذير التكرار ❗️**", alert=False)
+    await c_q.edit("▾∮ تحذير التكرار غير مفعل الان  ✅**")
 
 
 @november.bot_cmd(incoming=True, func=lambda e: e.is_private)

@@ -3,7 +3,7 @@ from datetime import datetime
 
 from telethon.errors import BadRequestError, FloodWaitError, ForbiddenError
 
-from userbot import Nov
+from userbot import November
 
 from ..Config import Config
 from ..core.logger import logging
@@ -28,7 +28,7 @@ botusername = Config.TG_BOT_USERNAME
 cmhd = Config.COMMAND_HAND_LER
 
 
-@Nov.bot_cmd(
+@November.Nov_cmd(
     pattern=f"^اوامري$",
     from_users=Config.OWNER_ID,
 )
@@ -42,7 +42,7 @@ async def bot_help(event):
 
 """
     )
-@Nov.bot_cmd(
+@November.Nov_cmd(
     pattern=f"^/cast$",
     from_users=Config.OWNER_ID,
 )
@@ -102,8 +102,7 @@ async def bot_broadcast(event):
     )
     await br_cast.edit(b_info, parse_mode="html")
 
-
-@Nov.cat_cmd(
+@November.Nov_cmd(
     pattern=f"/users$",
     command=("users", plugin_category),                  #بعدين
     info={
@@ -119,11 +118,11 @@ async def ban_starters(event):
         return await edit_delete(event, "**▾∮ليس لديك مستخدمين في بوتك!⚠️ **")
     msg = "**▾∮اليكَ قائمة مستخدمين بوتك 🔖↶**\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n\n"
+        msg += f"**▾∮ الاسم ⪼ ** `{user.first_name}`\n**▾∮ الايدي ⪼** `{user.user_id}`\n**▾∮ المعرف ⪼** @{user.username}\n**▾∮ تاريخ الاستخدام ⪼** __{user.date}__ \n**▾∮ الرابط ⪼** 「{_format.mentionuser(user.first_name , user.user_id)}」\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)\n\n"
     await edit_or_reply(event, msg)
 
 
-@Nov.bot_cmd(
+@November.Nov_cmd(
     pattern=f"^/ban\s+([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -155,7 +154,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@Nov.bot_cmd(
+@November.Nov_cmd(
     pattern=f"^/unban(?:\s|$)([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -181,7 +180,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@Nov.cat_cmd(
+@November.Nov_cmd(
     pattern=f"/banlist/banlist$",
     command=("banlist", plugin_category),
     info={
@@ -201,7 +200,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@Nov.cat_cmd(
+@November.Nov_cmd(
     pattern=f"/antif  (on|off)$",
     command=("antif ", plugin_category),
     info={

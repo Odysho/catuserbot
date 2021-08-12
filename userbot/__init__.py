@@ -14,16 +14,16 @@ __copyright__ = "NovemberBot Copyright (C) 2020 - 2021  " + __author__
 
 catub.version = __version__
 catub.tgbot.version = __version__
-LOGS = logging.getLogger("CatUserbot")
+LOGS = logging.getLogger("NovemberBot")
 bot = catub
 
 StartTime = time.time()
 catversion = "3.0.3"
 
-if Config.UPSTREAM_REPO == "badcat":
+if Config.UPSTREAM_REPO == "unODY":
+    UPSTREAM_REPO_URL = "https://github.com/Odysho/Telethon-Arab"
+elif Config.UPSTREAM_REPO == "ODY":
     UPSTREAM_REPO_URL = "https://github.com/Odysho/Telethon-Arab-helper"
-elif Config.UPSTREAM_REPO == "goodcat":
-    UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 

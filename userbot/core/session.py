@@ -16,7 +16,7 @@ else:
     session = "catuserbot"
 
 try:
-    catub = CatUserBotClient(
+    november = CatUserBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
@@ -31,7 +31,7 @@ except Exception as e:
     sys.exit()
 
 
-catub.tgbot = tgbot = CatUserBotClient(
+november.tgbot = tgbot = CatUserBotClient(
     session="CatTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,

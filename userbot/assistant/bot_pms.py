@@ -313,9 +313,9 @@ async def send_flood_alert(user_) -> None:
     # sourcery no-metrics
     buttons = [
         (
-            Button.inline("🚫  BAN", data=f"bot_pm_ban_{user_.id}"),
+            Button.inline("حظر المستخدم ⛔️❗️", data=f"bot_pm_ban_{user_.id}"),
             Button.inline(
-                "➖ Bot Antiflood [OFF]",
+                "ايقاف تحذير التكرار ﹥[off] ⚠️",
                 data="toggle_bot-antiflood_off",
             ),
         )

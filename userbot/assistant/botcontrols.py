@@ -34,13 +34,7 @@ cmhd = Config.COMMAND_HAND_LER
 )
 async def bot_help(event):
     await event.reply(
-        f"""**▾∮ قائـمه اوامر المطور ↶**\n* `تستخدم في ↫ `{botusername} `فقط!`\n\n
-/info\n**▾∮قم بالرد ع المستخدم لجلب معلوماتة ↶**\n*` يساعد ع معرفة الملصقات المرسلة `ツ\n
-/ban\n**▾∮قم بالرد ع المستخدم واعطاؤه السبب او ↶**\n**/ban @nneee + السبب**\n*` لحظر المستخدم من البوت `✘\n
-/unban\n**▾∮الامر والمعرف والسبب (اختياري) ↶**\n**/unban @nneee + السبب اختياري**\n*`لالغاء حظر المستخدم من البوت `✔️\n
-/cast\n**▾∮قم بالرد ع الرسالة لاذاعتها للمستخدمين ↸**\n*`لنشر رسالة لمستخدمي البوت`⊠\n
-
-"""
+        f"**▾∮ قائـمه اوامر المطور ↶**\n* `تستخدم في ↫ `{botusername} ` فقط! `\n\n/info\n**▾∮قم بالرد ع المستخدم لجلب معلوماتة ↶**\n*`لمعرفة الملصقات المرسلة` ツ\n/ban\n**▾∮قم بالرد ع المستخدم واعطاؤه السبب او ↶**\n**/ban @nneee + السبب**\n*` لحظر المستخدم من البوت `✘\n/unban\n**▾∮الامر والمعرف والسبب (اختياري) ↶**\n**/unban @nneee + السبب اختياري**\n* `لالغاء حظر المستخدم من البوت `√\n/banlist \n**▾∮لمعرفة المحظورين من البوت ㋡**\n/antif + on & off\n**▾∮لتشغيل وايقاف التكرار ↶**\n* `عند التشغيل يحظر المزعجين `⊝\n/cast\n**▾∮قم بالرد ع الرسالة لاذاعتها للمستخدمين ↸**\n* `لنشر رسالة لمستخدمي البوت `◛\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     )
 @November.Nov_cmd(
     pattern=f"^/cast$",
@@ -94,11 +88,11 @@ async def bot_broadcast(event):
                 except FloodWaitError as e:
                     await asyncio.sleep(e.seconds)
     end_ = datetime.now()
-    b_info = f"**▾∮تم ارسال رسالتك الى** «<i>{count}</i>» **مستخدمين 📣**"
+    b_info = f"<b>▾∮تم ارسال رسالتك الى «</b><i>{count}</i><b>» مستخدمين 📣</b>"
     if len(blocked_users) != 0:
-        b_info += f"\n🚫  <b>{len(blocked_users)} users</b> blocked your bot recently, so have been removed."
+        b_info += f"\n<b>▾∮مجموع المستخدمين ↫ «</b><code>{len(blocked_users)}</code><b>» قاموا بحظر البوت ✕ </b>"
     b_info += (
-        f"\n⏳  <code>Process took: {time_formatter((end_ - start_).seconds)}</code>."
+        f"\n<i>▾∮استغرقت عملية الاذاعة ↫ </i> <code>{time_formatter((end_ - start_).seconds)}</code>"
     )
     await br_cast.edit(b_info, parse_mode="html")
 
@@ -163,7 +157,7 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`I can't find user to unban`", reply_to=reply_to
+            event.chat_id, "**▾∮ لا استطيع ايجاد المستخدم لالغاء حظره!**", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
@@ -174,7 +168,7 @@ async def ban_botpms(event):
     if not check:
         return await event.client.send_message(
             event.chat_id,
-            f"**▾∮ تم الغاء الحظر مسبقًا للمستخدم ↶**\n\n**▾∮ الاسم ⪼ ** `{user.first_name}`\n**▾∮ الايدي ⪼** `{user.user_id}`\n**▾∮ الرابط ⪼** 「{_format.mentionuser(user.first_name , user.id)}\n",
+            f"**▾∮ تم الغاء الحظر مسبقًا للمستخدم ❕↶**\n\n** ▾∮ المستخدم ⪼** 「{_format.mentionuser(user.first_name , user.id)}」\n",
         )
     msg = await unban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
@@ -182,7 +176,7 @@ async def ban_botpms(event):
 
 @November.Nov_cmd(
     pattern=f"/banlist/banlist$",
-    command=("banlist", plugin_category),
+    command=("bblist", plugin_category),
     info={
         "header": "To get users list who are banned in bot.",                           #بعدين
         "description": "To get list of users who are banned in bot.",
@@ -196,13 +190,12 @@ async def ban_starters(event):
         return await edit_delete(event, "**▾∮ لا يوجد مستخدمين محظورين من البوت ✓**")
     msg = "**▾∮ اليكَ قائمة المحظورين من ببوتك 📮↶**\n\n**"
     for user in ulist:
-        msg += f"**▾∮ الاسم ⪼ **`{user.first_name}`\n**▾∮ الايدي ⪼ **`{user.chat_id}`\n**▾∮ المعرف ⪼** @{user.username}\n**▾∮ تاريخ الحظر ⪼** `{user.date}`\n**▾∮ السبب ⪼** __{user.reason}__\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
+        msg += f"**▾∮ الاسم ⪼ **`{user.first_name}`\n**▾∮ الايدي ⪼ **`{user.chat_id}`\n**▾∮ المعرف ⪼** @{user.username}\n**▾∮ الرابط ⪼ ** ┕{_format.mentionuser(user.first_name , user.chat_id)}┙\n**▾∮ تاريخ الحظر ⪼** `{user.date}`\n**▾∮ سبب الحظر ⪼** __{user.reason}__\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)\n\n"
     await edit_or_reply(event, msg)
-
 
 @November.Nov_cmd(
     pattern=f"/antif  (on|off)$",
-    command=("antif ", plugin_category),
+    command=("bot_antif", plugin_category),
     info={
         "header": "To enable or disable bot antiflood.",
         "description": "if it was turned on then after 10 messages or 10 edits of same messages in less time then your bot auto loacks them.",

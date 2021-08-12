@@ -3,7 +3,7 @@ from datetime import datetime
 
 from telethon.errors import BadRequestError, FloodWaitError, ForbiddenError
 
-from userbot import November
+from userbot import november
 
 from ..Config import Config
 from ..core.logger import logging
@@ -28,7 +28,7 @@ botusername = Config.TG_BOT_USERNAME
 cmhd = Config.COMMAND_HAND_LER
 
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"^اوامري$",
     from_users=Config.OWNER_ID,
 )
@@ -36,7 +36,7 @@ async def bot_help(event):
     await event.reply(
         f"**▾∮ قائـمه اوامر المطور ↶**\n* `تستخدم في ↫ `{botusername} ` فقط! `\n\n/info\n**▾∮قم بالرد ع المستخدم لجلب معلوماتة ↶**\n*`لمعرفة الملصقات المرسلة` ツ\n/ban\n**▾∮قم بالرد ع المستخدم واعطاؤه السبب او ↶**\n**/ban @nneee + السبب**\n*` لحظر المستخدم من البوت `✘\n/unban\n**▾∮الامر والمعرف والسبب (اختياري) ↶**\n**/unban @nneee + السبب اختياري**\n* `لالغاء حظر المستخدم من البوت `√\n/banlist \n**▾∮لمعرفة المحظورين من البوت ㋡**\n/antif + on & off\n**▾∮لتشغيل وايقاف التكرار ↶**\n* `عند التشغيل يحظر المزعجين `⊝\n/cast\n**▾∮قم بالرد ع الرسالة لاذاعتها للمستخدمين ↸**\n* `لنشر رسالة لمستخدمي البوت `◛\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)"
     )
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"^/cast$",
     from_users=Config.OWNER_ID,
 )
@@ -96,7 +96,7 @@ async def bot_broadcast(event):
     )
     await br_cast.edit(b_info, parse_mode="html")
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"/users$",
     command=("users", plugin_category),                  #بعدين
     info={
@@ -116,7 +116,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"^/ban\s+([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -148,7 +148,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"^/unban(?:\s|$)([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
@@ -174,7 +174,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"/banlist/banlist$",
     command=("bblist", plugin_category),
     info={
@@ -193,7 +193,7 @@ async def ban_starters(event):
         msg += f"**▾∮ الاسم ⪼ **`{user.first_name}`\n**▾∮ الايدي ⪼ **`{user.chat_id}`\n**▾∮ المعرف ⪼** @{user.username}\n**▾∮ الرابط ⪼ ** ┕{_format.mentionuser(user.first_name , user.chat_id)}┙\n**▾∮ تاريخ الحظر ⪼** `{user.date}`\n**▾∮ سبب الحظر ⪼** __{user.reason}__\n\n**⍣ⵧⵧⵧⵧⵧɴᴏᴠᴇᴍʙᴇʀⵧⵧⵧⵧⵧ⍣**\n[▾∮ՏøuƦcε πøνεʍβεƦ 🌦](https://t.me/nneee)\n\n"
     await edit_or_reply(event, msg)
 
-@November.Nov_cmd(
+@november.Nov_cmd(
     pattern=f"/antif  (on|off)$",
     command=("bot_antif", plugin_category),
     info={

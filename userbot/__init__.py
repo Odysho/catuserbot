@@ -9,8 +9,8 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.0.2"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "CatUserBot <https://github.com/sandy1709/catuserbot>"
-__copyright__ = "CatUserBot Copyright (C) 2020 - 2021  " + __author__
+__author__ = "NovemberBot <https://t.me/nneee>"
+__copyright__ = "NovemberBot Copyright (C) 2020 - 2021  " + __author__
 
 catub.version = __version__
 catub.tgbot.version = __version__
@@ -21,7 +21,7 @@ StartTime = time.time()
 catversion = "3.0.3"
 
 if Config.UPSTREAM_REPO == "badcat":
-    UPSTREAM_REPO_URL = "https://github.com/Jisan09/catuserbot"
+    UPSTREAM_REPO_URL = "https://github.com/Odysho/Telethon-Arab-helper"
 elif Config.UPSTREAM_REPO == "goodcat":
     UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
 else:

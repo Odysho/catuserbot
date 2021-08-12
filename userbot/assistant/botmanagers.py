@@ -45,7 +45,7 @@ async def get_user_and_reason(event):
 
 def progress_str(total: int, current: int) -> str:
     percentage = current * 100 / total
-    prog_arg = "**Progress** : `{}%`\n" "```[{}{}]```"
+    prog_arg = "**هناك تقدم** : `{}%`\n" "```[{}{}]```"
     return prog_arg.format(
         percentage,
         "".join((Config.FINISHED_PROGRESS_STR for i in range(floor(percentage / 5)))),

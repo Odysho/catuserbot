@@ -38,7 +38,7 @@ sudo_enabledcmds = sudo_enabled_cmds()
 
 
 class CatUserBotClient(TelegramClient):
-    def cat_cmd(
+    def nov_cmd(
         self: TelegramClient,
         pattern: str or tuple = None,
         info: Union[str, Dict[str, Union[str, List[str], Dict[str, str]]]]
@@ -152,7 +152,7 @@ class CatUserBotClient(TelegramClient):
                             Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
                         )
 
-            from .session import catub
+            from .session import novmber
 
             if not func.__doc__ is None:
                 CMD_INFO[command[0]].append((func.__doc__).strip())
@@ -165,18 +165,18 @@ class CatUserBotClient(TelegramClient):
                     except BaseException:
                         LOADED_CMDS.update({command[0]: [wrapper]})
                 if edited:
-                    catub.add_event_handler(
+                    novmber.add_event_handler(
                         wrapper,
                         MessageEdited(pattern=REGEX_.regex1, outgoing=True, **kwargs),
                     )
-                catub.add_event_handler(
+                novmber.add_event_handler(
                     wrapper,
                     NewMessage(pattern=REGEX_.regex1, outgoing=True, **kwargs),
                 )
                 if allow_sudo and gvarstatus("sudoenable") is not None:
                     if command is None or command[0] in sudo_enabledcmds:
                         if edited:
-                            catub.add_event_handler(
+                            novmber.add_event_handler(
                                 wrapper,
                                 MessageEdited(
                                     pattern=REGEX_.regex2,
@@ -184,7 +184,7 @@ class CatUserBotClient(TelegramClient):
                                     **kwargs,
                                 ),
                             )
-                        catub.add_event_handler(
+                        novmber.add_event_handler(
                             wrapper,
                             NewMessage(
                                 pattern=REGEX_.regex2,
@@ -200,8 +200,8 @@ class CatUserBotClient(TelegramClient):
                 except BaseException:
                     LOADED_CMDS.update({file_test: [func]})
                 if edited:
-                    catub.add_event_handler(func, events.MessageEdited(**kwargs))
-                catub.add_event_handler(func, events.NewMessage(**kwargs))
+                    novmber.add_event_handler(func, events.MessageEdited(**kwargs))
+                novmber.add_event_handler(func, events.NewMessage(**kwargs))
             return wrapper
 
         return decorator
@@ -269,12 +269,12 @@ class CatUserBotClient(TelegramClient):
                             Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
                         )
 
-            from .session import catub
+            from .session import novmber
 
             if edited is True:
-                catub.tgbot.add_event_handler(func, events.MessageEdited(**kwargs))
+                novmber.tgbot.add_event_handler(func, events.MessageEdited(**kwargs))
             else:
-                catub.tgbot.add_event_handler(func, events.NewMessage(**kwargs))
+                novmber.tgbot.add_event_handler(func, events.NewMessage(**kwargs))
 
             return wrapper
 

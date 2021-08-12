@@ -15,7 +15,7 @@ from .utils import (
     verifyLoggerGroup,
 )
 
-LOGS = logging.getLogger("CatUserbot")
+LOGS = logging.getLogger("Novuserbot")
 
 print(userbot.__copyright__)
 print("Licensed under the terms of the " + userbot.__license__)
@@ -23,9 +23,9 @@ print("Licensed under the terms of the " + userbot.__license__)
 cmdhr = Config.COMMAND_HAND_LER
 
 try:
-    LOGS.info("Starting Userbot")
+    LOGS.info("بدء تشغيل روبوت المستخدم Novuserbot")
     catub.loop.run_until_complete(setup_bot())
-    LOGS.info("TG Bot Startup Completed")
+    LOGS.info("تم الانتهاء من تشغيل نوفمبر بوت")
 except Exception as e:
     LOGS.error(f"{str(e)}")
     sys.exit()
@@ -63,15 +63,15 @@ async def startup_process():
     return
 
 
-catub.loop.run_until_complete(startup_process())
+november.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
-    catub.disconnect()
+    november.disconnect()
 elif not Catcheck.sucess:
     if HEROKU_APP is not None:
         HEROKU_APP.restart()
 else:
     try:
-        catub.run_until_disconnected()
+        november.run_until_disconnected()
     except ConnectionError:
         pass

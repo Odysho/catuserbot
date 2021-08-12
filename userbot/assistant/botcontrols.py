@@ -142,7 +142,7 @@ async def ban_botpms(event):
     if check:
         return await event.client.send_message(
             event.chat_id,
-            f"**▾∮ المستخدم من ضمن المحظورين!**\n**▾∮سبب حظرة من البوت ↫** `{check.reason}`\n**▾∮تاريخ الحظر ↫** `{check.date}`\n",
+            f"**▾∮ المستخدم من ضمن المحظورين!**\n**▾∮ سبب حظرة من البوت ↫** `{check.reason}`\n**▾∮ تاريخ الحظر ↫** `{check.date}`\n",
         )
     msg = await ban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)

@@ -74,11 +74,11 @@ def main_menu():
         ),
         (
             Button.inline(
-                f"🎨 Fun ({len(GRP_INFO['fun'])})",
+                f"ملفات الالعاب والمرح ⛄️ ({len(GRP_INFO['fun'])})",
                 data=f"fun_menu",
             ),
             Button.inline(
-                f"🧩 Misc ({len(GRP_INFO['misc'])})",
+                f"ملفات الميديا 🎧 ({len(GRP_INFO['misc'])})",
                 data=f"misc_menu",
             ),
         ),
@@ -245,7 +245,7 @@ async def inline_handler(event):  # sourcery no-metrics
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
         hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
-        if query.startswith("**Catuserbot"):
+        if query.startswith("**November BOT**"):
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),

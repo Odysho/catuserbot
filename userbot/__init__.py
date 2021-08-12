@@ -20,9 +20,7 @@ bot = catub
 StartTime = time.time()
 catversion = "3.0.3"
 
-if Config.UPSTREAM_REPO == "unODY":
-    UPSTREAM_REPO_URL = "https://github.com/Odysho/Telethon-Arab"
-elif Config.UPSTREAM_REPO == "ODY":
+if Config.UPSTREAM_REPO == "ODY":
     UPSTREAM_REPO_URL = "https://github.com/Odysho/Telethon-Arab-helper"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO

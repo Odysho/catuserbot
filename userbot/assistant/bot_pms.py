@@ -170,9 +170,9 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("**▾∮ قام المستخدم بحظر البوت❗️**")
+                return await event.reply("**▾ قام المستخدم بحظر البوت❗️**")
             except Exception as e:
-                return await event.reply(f"**▾∮ حدث خطأ!**\n`{str(e)}`")
+                return await event.reply(f"▾∮ حدث خطأ!\n`{str(e)}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -277,7 +277,6 @@ async def handler(event):
                     )
             except Exception as e:
                 LOGS.error(str(e))
-
 
 @november.bot_cmd(
     pattern=f"^/info$",
@@ -398,9 +397,9 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await november.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"**⌔︙عـذرا هنـاك خطـأ 🚫 :**\n{str(e)}")
+        await c_q.answer(f"▾∮ حدث خطأ!\n{str(e)}")
     else:
-        await c_q.answer(f"جاري حظر المستخدم ↫ `{user_name}`", alert=False)
+        await c_q.answer(f"جاري حظر المستخدم ↫ `{user_id}`", alert=False)
         await ban_user_from_bot(user, "لا يسمح بتكرار الرسائل!")
         await c_q.edit(f"▾∮ تم حظر المستخدم بسبب التكرار❗️ ↶**\n**▾∮الاسم ⪼ **`{user_name}`\n**▾∮الايدي ⪼ **`{user_id}`\n**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}")
 

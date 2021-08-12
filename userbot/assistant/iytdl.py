@@ -40,8 +40,8 @@ plugin_category = "bot"
 
 
 @november.nov_cmd(
-    pattern="بحث(?:\s|$)([\s\S]*)",
-    command=("بحث", plugin_category),
+    pattern="^يوت\s+([\s\S]*)",
+    command=("يوت", plugin_category),
     info={
         "header": "ytdl with inline buttons.",
         "description": "To search and download youtube videos by inline buttons.",
@@ -49,7 +49,7 @@ plugin_category = "bot"
     },
 )
 async def iytdl_inline(event):
-    "ytdl with inline buttons."
+    "يوتيوب مع ماركدون"
     reply = await event.get_reply_message()
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(1)

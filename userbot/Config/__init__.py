@@ -1,1 +1,1 @@
-from .Nov_config import Config
+from .nov_config import Config

@@ -13,7 +13,7 @@ loop = None
 if Config.STRING_SESSION:
     session = StringSession(str(Config.STRING_SESSION))
 else:
-    session = "Novuserbot"
+    session = "catuserbot"
 
 try:
     november = CatUserBotClient(

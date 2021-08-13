@@ -11,7 +11,7 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
 
-from userbot import catub
+from userbot import november
 
 from ..Config import Config
 from ..helpers.functions import rand_key
@@ -232,7 +232,7 @@ def paginate_help(
     return pairs
 
 
-@catub.tgbot.on(InlineQuery)
+@november.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics
     builder = event.builder
     result = None
@@ -535,7 +535,7 @@ async def inline_handler(event):  # sourcery no-metrics
         await event.answer([result] if result else None)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"close")))
+@november.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
@@ -544,7 +544,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit("Menu Closed", buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
+@november.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
@@ -555,7 +555,7 @@ async def on_plugin_callback_query_handler(event):
     await event.answer(text, cache_time=0, alert=True)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
+@november.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
@@ -566,7 +566,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(
+@november.tgbot.on(
     CallbackQuery(
         data=re.compile(b"back_([a-z]+)_([a-z]+)_([0-9]+)_?([a-z]+)?_?([0-9]+)?")
     )
@@ -598,14 +598,14 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
+@november.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
     await event.edit(_result[0], buttons=_result[1])
 
 
-@catub.tgbot.on(
+@november.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_prev\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -636,7 +636,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@november.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_next\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -664,7 +664,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@november.tgbot.on(
     CallbackQuery(data=re.compile(b"(.*)_cmdhelp_([a-z]+)_([0-9]+)_([a-z]+)_([0-9]+)"))
 )
 @check_owner

@@ -22,6 +22,8 @@ catversion = "3.0.3"
 
 if Config.UPSTREAM_REPO == "ODY":
     UPSTREAM_REPO_URL = "https://github.com/Odysho/Novuserbot"
+elif Config.UPSTREAM_REPO == "goodcat":
+    UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 

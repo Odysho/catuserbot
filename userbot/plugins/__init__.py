@@ -20,7 +20,7 @@ from ..helpers.utils import _cattools, _catutils, _format, install_pip, reply_id
 # =================== CONSTANT ===================
 bot = november
 LOGS = logging.getLogger(__name__)
-USERID = catub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
+USERID = november.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO

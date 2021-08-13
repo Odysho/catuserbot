@@ -24,7 +24,7 @@ cmdhr = Config.COMMAND_HAND_LER
 
 try:
     LOGS.info("بدء تشغيل روبوت المستخدم Novuserbot")
-    catub.loop.run_until_complete(setup_bot())
+    november.loop.run_until_complete(setup_bot())
     LOGS.info("تم الانتهاء من تشغيل نوفمبر بوت")
 except Exception as e:
     LOGS.error(f"{str(e)}")
